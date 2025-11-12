@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Roles;
+use App\Models\User;
+use App\Models\Rol;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
@@ -12,7 +13,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        //
+        $roles= Rol::all();
+        return view('roles.index', compact('roles'));
     }
 
     /**
@@ -20,7 +22,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
     /**
@@ -28,13 +30,18 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+        ]);
+
+        Rol::create($request->all());
+        return redirect()->route('rol.index')->with('success', 'rol creado correctamente.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Roles $roles)
+    public function show(Rol $roles)
     {
         //
     }
@@ -42,24 +49,30 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Roles $roles)
+    public function edit(Rol $rol)
     {
-        //
+        return view('roles.edit', compact('rol'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Roles $roles)
+    public function update(Request $request, Rol $rol)
     {
-        //
+         $request->validate([
+            'nombre' => 'required',
+        ]);
+
+        $rol->update($request->all());
+        return redirect()->route('rol.index')->with('success', 'rol actualizado correctamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Roles $roles)
+    public function destroy(Rol $rol)
     {
-        //
+        $rol->delete();
+        return redirect()->route('rol.index')->with('success', 'rol eliminado correctamente.');
     }
 }

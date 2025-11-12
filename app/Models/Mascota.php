@@ -19,9 +19,9 @@ class Mascota extends Model
         return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
-    // Una mascota puede tener muchas citas
-    public function citas()
+        public function raza()
     {
-        return $this->hasMany(Cita::class, 'mascota_id');
+        return $this->belongsTo(Raza::class, 'raza_id');
     }
+    
 }

@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\MascotaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,4 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::resource('usuarios', UsuarioController::class);
+    Route::resource('rol', RolesController::class);
+    Route::resource('clientes', clienteController::class);
+    Route::resource('mascotas', MascotaController::class);
+});
 require __DIR__.'/auth.php';

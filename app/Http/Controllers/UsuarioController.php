@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
+use App\Models\User;
+use App\Models\Rol;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -12,15 +13,16 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = User::all();
+        return view('usuarios.index', compact('usuarios'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        //
+    {   $roles =Rol::all();
+        return view('usuarios.create', compact('roles'));
     }
 
     /**
@@ -28,13 +30,22 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'id_rol' => 'required|integer',
+            'fecha_creacion' => 'required|date',
+        ]);
+
+        User::create($request->all());
+        return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Usuario $usuario)
+    public function show(User $usuario)
     {
         //
     }
@@ -42,24 +53,34 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Usuario $usuario)
+    public function edit(User $usuario)
     {
-        //
+        $roles = Rol::all();
+        return view('usuarios.edit', compact('usuario', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, User $usuario)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'id_rol' => 'required',
+            'fecha_creacion' => 'required|date',
+        ]);
+
+        $usuario->update($request->all());
+        return redirect()->route('usuarios.index')->with('success', 'usuario actualizado correctamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuario $usuario)
+    public function destroy(User $usuario)
     {
-        //
+        $usuario->delete();
+        return redirect()->route('usuarios.index')->with('success', 'usuario eliminado.');
     }
 }
