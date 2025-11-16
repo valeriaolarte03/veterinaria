@@ -15,9 +15,15 @@
             </div>
 
             <div>
-                <label class="block font-medium">id rol</label>
-                <input type="number" name="id_rol" class="w-full border rounded p-2" required>
+                <label class="block font-medium mb-1">Rol</label>
+                <select name="id_rol" class="w-full border rounded p-2" required>
+                    <option value="">Seleccione un rol</option>
+                    @foreach($roles as $rol)
+                        <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
+
 
             <div>
                 <label class="block font-medium">fecha creación</label>

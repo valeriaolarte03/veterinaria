@@ -12,7 +12,8 @@ class FcturaController extends Controller
      */
     public function index()
     {
-        //
+        $fcturas = Fctura::all();
+        return view('fctura.index', compact('fcturas'));
     }
 
     /**
@@ -20,7 +21,7 @@ class FcturaController extends Controller
      */
     public function create()
     {
-        //
+        return view('fctura.create');
     }
 
     /**
@@ -28,13 +29,21 @@ class FcturaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'cliente_id' => 'required|integer',
+            'fecha' => 'required|date',
+            'total' => 'required|decimal',
+        ]);
+
+        Fctura::create($request->all());
+        return redirect()->route('fctura.index')->with('success', 'Factura creada correctamente.');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Fctura $fctura)
+    public function show(Fctura $fcturas)
     {
         //
     }
@@ -44,7 +53,7 @@ class FcturaController extends Controller
      */
     public function edit(Fctura $fctura)
     {
-        //
+        return view('fctura.edit', compact('fctura'));
     }
 
     /**
@@ -52,7 +61,14 @@ class FcturaController extends Controller
      */
     public function update(Request $request, Fctura $fctura)
     {
-        //
+        $request->validate([
+            'cliente_id' => 'required|integer',
+            'fecha' => 'required|date',
+            'total' => 'required',
+        ]);
+
+        $fctura->update($request->all());
+        return redirect()->route('fctura.index')->with('success', 'Factura actualizada correctamente.');
     }
 
     /**
@@ -60,6 +76,7 @@ class FcturaController extends Controller
      */
     public function destroy(Fctura $fctura)
     {
-        //
+        $fctura->delete();
+        return redirect()->route('fctura.index')->with('success', 'Factura eliminada.');
     }
 }

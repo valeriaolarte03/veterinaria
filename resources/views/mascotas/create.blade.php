@@ -19,14 +19,24 @@
                 <input type="text" step="0.01" name="sexo" class="w-full border rounded p-2" required>
             </div>
 
-            <div>
-                <label class="block font-medium">Id cliente</label>
-                <input type="number" step="0.01" name="cliente_id" class="w-full border rounded p-2" required>
+             <div>
+                <label class="block font-medium mb-1">Dueño</label>
+                <select name="id_cliente" class="w-full border rounded p-2" required>
+                    <option value="">Selecione nombre</option>
+                    @foreach($clientes as $cliente)
+                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div>
-                <label class="block font-medium">Id raza</label>
-                <input type="number" name="raza_id" class="w-full border rounded p-2" required>
+                <label class="block font-medium mb-1">Raza</label>
+                <select name="id_raza" class="w-full border rounded p-2" required>
+                    <option value="">Selecione la raza</option>
+                    @foreach($razas as $raza)
+                        <option value="{{ $raza->id }}">{{ $raza->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Guardar</button>

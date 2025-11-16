@@ -5,6 +5,9 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\MascotaController;
+use App\Http\Controllers\FcturaController;
+use App\Http\Controllers\CitaController;
+use App\Http\Controllers\TratamientoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,5 +29,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('rol', RolesController::class);
     Route::resource('clientes', clienteController::class);
     Route::resource('mascotas', MascotaController::class);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('fctura', FcturaController::class);
+});
+Route::middleware('auth')->group(function () {
+    Route::resource('citas', CitaController::class);
+});
+Route::middleware('auth')->group(function () {
+    Route::resource('tratamientos', TratamientoController::class);
 });
 require __DIR__.'/auth.php';

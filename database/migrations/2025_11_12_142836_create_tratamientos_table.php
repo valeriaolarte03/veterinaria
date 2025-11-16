@@ -19,10 +19,10 @@ return new class extends Migration
             $table->decimal('costo');
             $table->timestamps();
 
-            // $table->foreign('cita_id')
-            //     ->references('id')
-            //     ->on('citas')
-            //     ->onDelete('cascade');
+            $table->foreign('cita_id')
+                 ->references('id')
+                 ->on('citas')
+                 ->onDelete('cascade');
         });
     }
 

@@ -19,10 +19,10 @@ return new class extends Migration
             $table->boolean('estado');
             $table->timestamps();
 
-            // $table->foreign('mascota_id')
-            //     ->references('id')
-            //     ->on('mascotas')
-            //     ->onDelete('cascade');
+            $table->foreign('mascota_id')
+                 ->references('id')
+                 ->on('mascotas')
+                 ->onDelete('cascade');
         
         });
     }

@@ -6,31 +6,99 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <x-application-logo class="block fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                <div class="hidden  ml-4 sm:flex sm:items-center sm:space-x-6">
 
-                    <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')">
-                        {{ __('Usuarios') }}
-                    </x-nav-link>
+                    {{-- Grupo: Gestión administrativa --}}
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open"
+                                class="text-gray-700 dark:text-gray-300 hover:text-black font-semibold">
+                            Gestión administrativa
+                        </button>
+                        
+                        <div x-show="open" @click.away="open = false"
+                            class="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-700 shadow-lg rounded py-2 z-50">
+                            
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="block px-4 py-2">
+                                {{ __('Dashboard') }}
+                            </x-nav-link>
 
-                    <x-nav-link :href="route('rol.index')" :active="request()->routeIs('rol.*')">
-                        {{ __('Roles') }}
-                    </x-nav-link>
+                            <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')" class="block px-4 py-2">
+                                {{ __('Usuarios') }}
+                            </x-nav-link>
 
-                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.*')">
-                        {{ __('Clientes') }}
-                    </x-nav-link>
+                            <x-nav-link :href="route('rol.index')" :active="request()->routeIs('rol.*')" class="block px-4 py-2">
+                                {{ __('Roles') }}
+                            </x-nav-link>
 
-                    <x-nav-link :href="route('mascotas.index')" :active="request()->routeIs('mascotas.*')">
-                        {{ __('Mascotas') }}
-                    </x-nav-link>
+                        </div>
+                    </div>
+
+
+                    {{-- Grupo: Clientes --}}
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open"
+                                class="text-gray-700 dark:text-gray-300 hover:text-black font-semibold">
+                            Clientes
+                        </button>
+
+                        <div x-show="open" @click.away="open = false"
+                            class="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-700 shadow-lg rounded py-2 z-50">
+
+                            <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.*')" class="block px-4 py-2">
+                                {{ __('Clientes') }}
+                            </x-nav-link>
+
+                        </div>
+                    </div>
+
+
+                    {{-- Grupo: Animales --}}
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open"
+                                class="text-gray-700 dark:text-gray-300 hover:text-black font-semibold">
+                            Animales
+                        </button>
+
+                        <div x-show="open" @click.away="open = false"
+                            class="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-700 shadow-lg rounded py-2 z-50">
+
+                            <x-nav-link :href="route('mascotas.index')" :active="request()->routeIs('mascotas.*')" class="block px-4 py-2">
+                                {{ __('Mascotas') }}
+                            </x-nav-link>
+
+                            <x-nav-link :href="route('citas.index')" :active="request()->routeIs('citas.*')" class="block px-4 py-2">
+                                {{ __('Citas') }}
+                            </x-nav-link>
+
+                            <x-nav-link :href="route('tratamientos.index')" :active="request()->routeIs('tratamientos.*')" class="block px-4 py-2">
+                                {{ __('Tratamientos') }}
+                            </x-nav-link>
+
+                        </div>
+                    </div>
+
+
+                    {{-- Grupo: Finanzas --}}
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open"
+                                class="text-gray-700 dark:text-gray-300 hover:text-black font-semibold">
+                            Finanzas
+                        </button>
+
+                        <div x-show="open" @click.away="open = false"
+                            class="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-700 shadow-lg rounded py-2 z-50">
+
+                            <x-nav-link :href="route('fctura.index')" :active="request()->routeIs('fctura.*')" class="block px-4 py-2">
+                                {{ __('Facturas') }}
+                            </x-nav-link>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -51,7 +119,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Perfil') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -61,7 +129,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Cerrar sesión') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>

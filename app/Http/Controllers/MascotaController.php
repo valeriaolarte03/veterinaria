@@ -22,8 +22,9 @@ class MascotaController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('mascotas.create');
+    {   $clientes = Cliente::all();
+        $razas = Raza::all();
+        return view('mascotas.create', compact('clientes', 'razas'));
     }
 
     /**
