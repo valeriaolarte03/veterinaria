@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Rol;
+use Carbon\Carbon; 
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -34,13 +35,20 @@ class UsuarioController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'id_rol' => 'required|integer',
-            'fecha_creacion' => 'required|date',
         ]);
 
-        User::create($request->all());
-        return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
+        dd(now()->toDateString());
 
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'id_rol' => $request->id_rol,
+            'fecha_creacion' => now()->toDateString(), // 🔹 fecha actual automáticamente
+        ]);
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
     }
+
 
     /**
      * Display the specified resource.
@@ -68,7 +76,6 @@ class UsuarioController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'id_rol' => 'required',
-            'fecha_creacion' => 'required|date',
         ]);
 
         $usuario->update($request->all());
