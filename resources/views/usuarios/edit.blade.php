@@ -32,12 +32,6 @@
                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
-
-            <div>
-                <label class="block font-medium">Fecha creación</label>
-                <input type="text" name="fecha_creacion" value="{{ $usuario->fecha_creacion }}" class="w-full border rounded p-2" placeholder="2025-01-01">
-            </div>
-
             <button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Actualizar</button>
         </form>
     </div>

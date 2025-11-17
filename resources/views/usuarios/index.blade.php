@@ -31,7 +31,7 @@
                         <td class="p-3">{{ $usuario->name }}</td>
                         <td class="p-3">{{ $usuario->email }}</td>
                         <td class="p-3">{{ $usuario->rol?->nombre ?? 'Sin rol' }}</td>
-                        <td class="p-3">{{ $usuario->fecha_creacion }}</td>
+                        <td class="p-3">{{ $usuario->created_at }}</td>
                         <td class="p-3 text-center">
                             <a href="{{ route('usuarios.edit', $usuario) }}" class="text-yellow-600 hover:underline mr-2">Editar</a>
                             <form action="{{ route('usuarios.destroy', $usuario) }}" method="POST" class="inline">

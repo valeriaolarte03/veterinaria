@@ -24,12 +24,6 @@
                 </select>
             </div>
 
-
-            <div>
-                <label class="block font-medium">fecha creación</label>
-                <input type="date" name="fecha_creacion" class="w-full border rounded p-2">
-            </div>
-
             <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Guardar</button>
         </form>
     </div>

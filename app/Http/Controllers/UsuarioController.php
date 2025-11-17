@@ -37,16 +37,8 @@ class UsuarioController extends Controller
             'id_rol' => 'required|integer',
         ]);
 
-        dd(now()->toDateString());
-
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'id_rol' => $request->id_rol,
-            'fecha_creacion' => now()->toDateString(), // 🔹 fecha actual automáticamente
-        ]);
-
-        return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
+        User::create($request->all());
+        return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');;
     }
 
 
