@@ -17,10 +17,10 @@ return new class extends Migration
             $table->integer('especie_id');
             $table->timestamps();
 
-            // $table->foreign('especie_id')
-            //     ->references('id')
-            //     ->on('especies')
-            //     ->onDelete('cascade');
+            $table->foreign('especie_id')
+                ->references('id')
+                ->on('especies')
+                ->onDelete('cascade');
         });
     }
     /**

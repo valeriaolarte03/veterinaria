@@ -37,7 +37,6 @@ class FcturaController extends Controller
 
         Fctura::create($request->all());
         return redirect()->route('fctura.index')->with('success', 'Factura creada correctamente.');
-
     }
 
     /**

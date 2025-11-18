@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Raza;
+use App\Models\Especie;
 use Illuminate\Http\Request;
 
 class RazaController extends Controller
@@ -12,7 +13,8 @@ class RazaController extends Controller
      */
     public function index()
     {
-        //
+        $razas = Raza::all();
+        return view('razas.index', compact('razas'));
     }
 
     /**
@@ -20,7 +22,8 @@ class RazaController extends Controller
      */
     public function create()
     {
-        //
+         $especies = Especie::all();
+        return view('razas.create', compact('especies'));
     }
 
     /**
@@ -28,7 +31,14 @@ class RazaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'especie_id' => 'required|integer',
+        ]);
+
+        Raza::create($request->all());
+        return redirect()->route('razas.index')->with('success', 'Raza creada correctamente.');;
+    
     }
 
     /**
@@ -44,7 +54,8 @@ class RazaController extends Controller
      */
     public function edit(Raza $raza)
     {
-        //
+        $especies = Especie::all();
+        return view('razas.edit', compact('raza', 'especies'));
     }
 
     /**
@@ -52,7 +63,13 @@ class RazaController extends Controller
      */
     public function update(Request $request, Raza $raza)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'especie_id' => 'required',
+        ]);
+
+        $raza->update($request->all());
+        return redirect()->route('razas.index')->with('success', 'raza actualizada correctamente.');
     }
 
     /**
@@ -60,6 +77,7 @@ class RazaController extends Controller
      */
     public function destroy(Raza $raza)
     {
-        //
+        $raza->delete();
+        return redirect()->route('razas.index')->with('success', 'raza eliminada.');
     }
 }

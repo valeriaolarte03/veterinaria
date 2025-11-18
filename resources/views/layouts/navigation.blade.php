@@ -79,6 +79,13 @@
                                 {{ __('Tratamientos') }}
                             </x-nav-link>
 
+                            <x-nav-link :href="route('especies.index')" :active="request()->routeIs('especies.*')" class="block px-4 py-2">
+                                {{ __('Especies') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('razas.index')" :active="request()->routeIs('razas.*')" class="block px-4 py-2">
+                                {{ __('Razas') }}
+                            </x-nav-link>
+
                         </div>
                     </div>
 
@@ -95,6 +102,10 @@
 
                             <x-nav-link :href="route('fctura.index')" :active="request()->routeIs('fctura.*')" class="block px-4 py-2">
                                 {{ __('Facturas') }}
+                            </x-nav-link>
+
+                            <x-nav-link :href="route('productos.index')" :active="request()->routeIs('producto.*')" class="block px-4 py-2">
+                                {{ __('Productos') }}
                             </x-nav-link>
 
                         </div>

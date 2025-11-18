@@ -12,7 +12,8 @@ class EspecieController extends Controller
      */
     public function index()
     {
-        //
+        $especies = Especie::all();
+        return view('especies.index', compact('especies'));
     }
 
     /**
@@ -20,7 +21,7 @@ class EspecieController extends Controller
      */
     public function create()
     {
-        //
+        return view('especies.create');
     }
 
     /**
@@ -28,7 +29,12 @@ class EspecieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+        ]);
+
+        Especie::create($request->all());
+        return redirect()->route('especies.index')->with('success', 'especie creada correctamente.');
     }
 
     /**
@@ -44,7 +50,7 @@ class EspecieController extends Controller
      */
     public function edit(Especie $especie)
     {
-        //
+        return view('especies.edit', compact('especie'));
     }
 
     /**
@@ -52,7 +58,12 @@ class EspecieController extends Controller
      */
     public function update(Request $request, Especie $especie)
     {
-        //
+         $request->validate([
+            'nombre' => 'required',
+        ]);
+
+        $especie->update($request->all());
+        return redirect()->route('especies.index')->with('success', 'especie actualizada correctamente.');
     }
 
     /**
@@ -60,6 +71,7 @@ class EspecieController extends Controller
      */
     public function destroy(Especie $especie)
     {
-        //
+        $especie->delete();
+        return redirect()->route('especies.index')->with('success', 'especie eliminada correctamente.');
     }
 }

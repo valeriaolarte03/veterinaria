@@ -8,6 +8,9 @@ use App\Http\Controllers\MascotaController;
 use App\Http\Controllers\FcturaController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\TratamientoController;
+use App\Http\Controllers\EspecieController;
+use App\Http\Controllers\RazaController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,5 +42,17 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     Route::resource('tratamientos', TratamientoController::class);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('especies', EspecieController::class)->parameters(['especies' => 'especie']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('razas', RazaController::class);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('productos', ProductoController::class);
 });
 require __DIR__.'/auth.php';
